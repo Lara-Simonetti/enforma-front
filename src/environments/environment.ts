@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    apiUrl: 'http://localhost:5000'
+    apiUrl: 'https://enforma-15-back.herokuapp.com/'
   };
