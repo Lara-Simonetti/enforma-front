@@ -12,7 +12,6 @@ import { EjercicioCrearComponent } from './ejercicio/ejercicio-crear/ejercicio-c
 import { EjercicioEditarComponent } from './ejercicio/ejercicio-editar/ejercicio-editar.component';
 import { EntrenamientoCrearComponent } from './entrenamiento/entrenamiento-crear/entrenamiento-crear.component';
 import { EntrenamientoEditarComponent } from './entrenamiento/entrenamiento-editar/entrenamiento-editar.component';
-import { RutinasComponent } from './Rutinas/Rutinas.component';
 
 const routes: Routes = [
   { path: '', component: UsuarioLoginComponent, pathMatch: 'full' },
@@ -28,7 +27,6 @@ const routes: Routes = [
   { path: 'ejercicio/editar/:id', component: EjercicioEditarComponent,  pathMatch: 'full' },
   { path: 'entrenamiento/crear/:idPersona', component: EntrenamientoCrearComponent,  pathMatch: 'full' },
   { path: 'entrenamiento/editar/:id', component: EntrenamientoEditarComponent,  pathMatch: 'full' },
-  { path: 'rutinas', component: RutinasComponent,  pathMatch: 'full' }
 ];
 
 @NgModule({
