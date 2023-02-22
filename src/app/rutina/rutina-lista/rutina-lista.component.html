@@ -8,6 +8,16 @@
       </table>
     </div>
       </div>
-  <div class="col col-8">
-  </div>
+      <div class="col col-8">
+        <div *ngIf="elegida">
+          <div class="card" style="width: 100%;">
+            <div class="card-body">
+              <h5 class="card-title">{{rutinaElegida.nombre}}</h5>
+              <p class="card-text" *ngIf="rutinaElegida">
+                <app-rutina-detalle [rutinaDetalle]="rutinaElegida"></app-rutina-detalle>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 </div>
