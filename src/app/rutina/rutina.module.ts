@@ -1,17 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RutinasComponent } from './Rutinas.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { EncabezadoAppModule } from '../encabezado-app/encabezado-app.module';
 
 @NgModule({
   imports: [
     CommonModule,
+    ReactiveFormsModule,
+    RouterModule,
     EncabezadoAppModule
   ],
-  declarations: [RutinasComponent],
-
   exports: [
-    RutinasComponent
+
+  ],
+  declarations: [
+
   ]
+
 })
-export class RutinasModule { }
+export class RutinaModule { }
