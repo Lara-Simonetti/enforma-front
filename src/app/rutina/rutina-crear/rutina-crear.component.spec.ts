@@ -2,22 +2,23 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { RutinaListaComponent } from './rutina-lista.component';
+import { RutinaCrearComponent } from './rutina-crear.component';
 
-describe('RutinaListaComponent', () => {
-  let component: RutinaListaComponent;
-  let fixture: ComponentFixture<RutinaListaComponent>;
+describe('RutinaCrearComponent', () => {
+  let component: RutinaCrearComponent;
+  let fixture: ComponentFixture<RutinaCrearComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RutinaListaComponent ]
+      declarations: [ RutinaCrearComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RutinaListaComponent);
+    fixture = TestBed.createComponent(RutinaCrearComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
