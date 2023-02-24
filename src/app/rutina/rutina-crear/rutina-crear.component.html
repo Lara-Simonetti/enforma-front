@@ -1,0 +1,88 @@
+<app-encabezado></app-encabezado>
+<h3>
+  Rutina nueva
+</h3>
+
+<form
+ [formGroup]="rutinaForm"
+ (ngSubmit)="!rutinaForm.invalid && crearRutina(rutinaForm.value)"
+>
+  <!--Nombre-->
+  <div class="form-group mx-sm-3 mb-2">
+    <label for="nombre">Nombre</label>
+    <input
+      novalidate
+      id="nombre"
+      class="form-control"
+      formControlName="nombre"
+      placeholder="Nombre de la rutina"
+    />
+    <div
+      class="alert alert-danger alert-dismissible fade show"
+      *ngIf="
+        rutinaForm.get('nombre')!.hasError('required') &&
+        rutinaForm.get('nombre')!.touched
+      "
+    >
+      Nombre requerido
+    </div>
+    <div
+      class="alert alert-danger alert-dismissible fade show"
+      *ngIf="rutinaForm.get('nombre')!.hasError('minlength')"
+    >
+      El nombre es muy corto, debe tener al menos dos caracteres.
+    </div>
+  </div>
+
+  <!--Descripción-->
+  <div class="form-group mx-sm-3 mb-2">
+    <label for="descripcion">Descripción</label>
+    <input
+      novalidate
+      id="descripcion"
+      class="form-control"
+      formControlName="descripcion"
+      placeholder="Descripción de la rutina"
+    />
+    <div
+      class="alert alert-danger alert-dismissible fade show"
+      *ngIf="
+        rutinaForm.get('descripcion')!.hasError('required') &&
+        rutinaForm.get('descripcion')!.touched
+      "
+    >
+      Descripción requerida
+    </div>
+    <div
+      class="alert alert-danger alert-dismissible fade show"
+      *ngIf="rutinaForm.get('descripcion')!.hasError('maxlength')"
+    >
+      La descripción es demasiado larga, debe tener máximo 100 caracteres
+    </div>
+  </div>
+
+  <!--Calorías-->
+  <div class="form-group mx-sm-3 mb-2">
+    <label for="duracion_minutos">Duracion en minutos de la rutina</label>
+    <input
+      novalidate
+      id="duracion_minutos"
+      class="form-control"
+      type="number"
+      formControlName="duracion_minutos"
+      placeholder="Duracion minutos"
+    />
+    <div
+      class="alert alert-danger alert-dismissible fade show"
+      *ngIf="
+        rutinaForm.get('calorias')!.hasError('required') &&
+        rutinaForm.get('calorias')!.touched
+      "
+    >
+      La duracion es requerida
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="!rutinaForm.valid">Crear</button>
+  <button type="button" class="btn btn-danger ml-3" (click)="cancelarRutina()">Cancelar</button>
+</form>
