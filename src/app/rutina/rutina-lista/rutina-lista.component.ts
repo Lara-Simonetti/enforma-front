@@ -17,6 +17,7 @@ export class RutinaListaComponent implements OnInit {
   rutinas: Array<Rutina>=[]
   ejerciciosRutina: Array<Ejercicio> = []
 
+
   constructor(
     private routerPath: Router,
     private router: ActivatedRoute,
@@ -32,7 +33,9 @@ export class RutinaListaComponent implements OnInit {
 
   ngOnInit() {
     this.rutinaService.darRutinas().subscribe((rutinas) => {
-      this.rutinas = rutinas;
+
+      this.rutinas = rutinas.sort((x, y) => x.nombre.localeCompare(y.nombre));;
+
       const rutinaId = parseInt(this.router.snapshot.params['id']);
       
       const rutinasFiltradas = rutinas.filter((r: Rutina) => r.id === rutinaId);
