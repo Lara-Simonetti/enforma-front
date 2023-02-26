@@ -29,8 +29,7 @@ const routes: Routes = [
   { path: 'ejercicio/editar/:id', component: EjercicioEditarComponent,  pathMatch: 'full' },
   { path: 'entrenamiento/crear/:idPersona', component: EntrenamientoCrearComponent,  pathMatch: 'full' },
   { path: 'entrenamiento/editar/:id', component: EntrenamientoEditarComponent,  pathMatch: 'full' },
-  { path: 'rutina', component: RutinaListaComponent,  pathMatch: 'full' },
-  { path: 'rutina/:id', component: PersonaListaComponent,  pathMatch: 'full' },
+  { path: 'rutina', component: RutinaListaComponent,  pathMatch: 'full' }
   { path: 'entrenador', component: EntrenadorListaComponent,  pathMatch: 'full' }
   { path: 'rutina/crear', component: RutinaCrearComponent,  pathMatch: 'full' },
   { path: 'rutina/:id', component: RutinaListaComponent,  pathMatch: 'full' }
