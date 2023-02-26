@@ -25,4 +25,11 @@ export class RutinaService {
     return this.http.post<Rutina>(`${this.apiUrl}/rutina`, rutina, { headers: headers })
   }
 
+  editarRutina(rutina): Observable<Rutina> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+    })
+    return this.http.put<Rutina>(`${this.apiUrl}/rutina/${rutina.id}`, rutina, { headers: headers });
+  }
+
 }
