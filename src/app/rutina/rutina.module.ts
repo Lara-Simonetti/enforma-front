@@ -5,7 +5,8 @@ import { RouterModule } from '@angular/router';
 import { EncabezadoAppModule } from '../encabezado-app/encabezado-app.module';
 import { RutinaListaComponent } from "./rutina-lista/rutina-lista.component";
 import { RutinaDetalleComponent } from "./rutina-detalle/rutina-detalle.component";
-
+import { RutinaCrearComponent } from "./rutina-crear/rutina-crear.component";
+import { EjercicioRutinaListaComponent } from '../ejercicio/ejercicio-rutina-lista/ejercicio-rutina-lista.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -15,11 +16,15 @@ import { RutinaDetalleComponent } from "./rutina-detalle/rutina-detalle.componen
   ],
   exports: [
     RutinaListaComponent,
-    RutinaDetalleComponent
+    RutinaDetalleComponent,
+    RutinaCrearComponent,
+    EjercicioRutinaListaComponent
   ],
   declarations: [
     RutinaListaComponent,
-    RutinaDetalleComponent
+    RutinaDetalleComponent,
+    RutinaCrearComponent,
+    EjercicioRutinaListaComponent
   ]
 
 })
