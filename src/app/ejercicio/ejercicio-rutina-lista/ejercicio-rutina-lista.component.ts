@@ -38,13 +38,16 @@ export class EjercicioRutinaListaComponent implements OnInit {
     this.agregar = true;
   }
 
-  confirmarEjercicio(ejercicioId: string): void {
-    console.log("ejercicio abajo");
-    console.log("WHERE ARE YOU")
-    var ejercicio = this.ejerciciosDisponibles.find(ejercicio => ejercicio.id = parseInt(ejercicioId))
-    this.rutinaDetalle.ejercicioRutina.push(ejercicio);
-    console.log(ejercicio);
-    console.log("ejercicio^^^");
+  confirmarEjercicio(ejercicioName: string): void {
+    let ejercicio = {} as Ejercicio
+    for(var i = 0; i<=this.ejerciciosDisponibles.length; i++){
+      if(ejercicioName == this.ejerciciosDisponibles[i].nombre){
+        ejercicio = this.ejerciciosDisponibles[i];
+        break
+      }
+    }
+    let ejercicios = this.rutinaDetalle.ejercicioRutina;
+    ejercicios.push(ejercicio);
     this.agregar = false;
     this.rutinaService.editarRutina(this.rutinaDetalle).subscribe((rutina) => {
       this.toastr.success("Confirmation", "El ejercicio fue agregado")
