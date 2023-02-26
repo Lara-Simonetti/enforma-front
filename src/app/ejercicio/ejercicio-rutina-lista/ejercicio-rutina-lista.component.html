@@ -2,9 +2,16 @@
     <div class="col col-12">
       <div class="card" style="width: 100%;">
         <div class="card-body">
-          <h5 class="card-title">Ejercicios Rutina
+          <h5 class="card-title">Ejercicios de la rutina
             <button type="button" class="btn btn-warning"><i class="bi bi-plus-circle"></i></button>
           </h5>
+            <table>
+              <tbody>
+                <tr *ngFor="let ejercicio of ejercicios">
+                  <td>{{ejercicio.nombre}}</td>
+                </tr>
+              </tbody>
+            </table>
         </div>
       </div>
     </div>
