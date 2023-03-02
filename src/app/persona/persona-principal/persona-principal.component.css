@@ -1,0 +1,11 @@
+#pesona-principal-title > h3 {
+    display: inline;
+}
+
+#pesona-principal-title > button {
+    margin-bottom: 8px;
+}
+
+.card {
+    margin-bottom: 10px;
+}

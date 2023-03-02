@@ -1,0 +1,44 @@
+<app-encabezado></app-encabezado>
+
+<div class="row">
+  <div class="col col-12" id="pesona-principal-title">
+    <h3 *ngIf="persona">{{persona.nombre}}&nbsp;{{persona.apellido}}</h3>&nbsp;
+    <h3 *ngIf="!persona">Cliente</h3>&nbsp;
+    <button type="button" class="btn btn-primary" [disabled]="!persona">Reporte</button>
+  </div>
+</div>
+<br/>
+
+
+<div class="row">
+  <div class="col col-12">
+    <div class="card" style="width: 100%;">
+      <div class="card-body">
+        <h5 class="card-title">Información Personal</h5>
+        <p class="card-text" *ngIf="persona">
+          <app-persona-detalle [personaDetalle]="persona"></app-persona-detalle>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col col-12">
+    <div class="card" style="width: 100%;">
+      <div class="card-body">
+        <h5 class="card-title">Entrenamientos</h5>
+        <p class="card-text" *ngIf="persona">
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col col-12">
+    <div class="card" style="width: 100%;">
+      <div class="card-body">
+        <h5 class="card-title">Rutinas</h5>
+        <p class="card-text" *ngIf="persona">
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
