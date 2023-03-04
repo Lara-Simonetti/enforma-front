@@ -10,6 +10,7 @@ import { PersonaListaComponent } from './persona-lista/persona-lista.component';
 import { PersonaEditarComponent } from './persona-editar/persona-editar.component';
 import { PersonaCrearComponent } from './persona-crear/persona-crear.component';
 import { EntrenamientoPersonaListaComponent } from '../entrenamiento/entrenamiento-persona-lista/entrenamiento-persona-lista.component';
+import { PersonaPrincipalComponent } from './persona-principal/persona-principal.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { EntrenamientoPersonaListaComponent } from '../entrenamiento/entrenamien
     PersonaCrearComponent,
     PersonaEditarComponent,
     EntrenamientoPersonaListaComponent,
-    PersonaTerminarComponent
+    PersonaTerminarComponent,
+    PersonaPrincipalComponent
   ],
   declarations: [
     PersonaListaComponent,
@@ -33,7 +35,8 @@ import { EntrenamientoPersonaListaComponent } from '../entrenamiento/entrenamien
     PersonaEditarComponent,
     PersonaReporteComponent,
     EntrenamientoPersonaListaComponent,
-    PersonaTerminarComponent
+    PersonaTerminarComponent,
+    PersonaPrincipalComponent
   ]
 })
 export class PersonaModule { }

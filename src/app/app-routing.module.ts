@@ -7,6 +7,7 @@ import { PersonaCrearComponent } from './persona/persona-crear/persona-crear.com
 import { PersonaEditarComponent } from './persona/persona-editar/persona-editar.component';
 import { PersonaTerminarComponent } from './persona/persona-terminar/persona-terminar.component';
 import { PersonaReporteComponent } from './persona/persona-reporte/persona-reporte.component';
+import { PersonaPrincipalComponent } from './persona/persona-principal/persona-principal.component';
 import { EjercicioListaComponent } from './ejercicio/ejercicio-lista/ejercicio-lista.component';
 import { EjercicioCrearComponent } from './ejercicio/ejercicio-crear/ejercicio-crear.component';
 import { EjercicioEditarComponent } from './ejercicio/ejercicio-editar/ejercicio-editar.component';
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'persona/editar/:id', component: PersonaEditarComponent,  pathMatch: 'full' },
   { path: 'persona/reporte/:id', component: PersonaReporteComponent,  pathMatch: 'full' },
   { path: 'persona/terminar/:id', component: PersonaTerminarComponent,  pathMatch: 'full' },
+  { path: 'principal', component: PersonaPrincipalComponent,  pathMatch: 'full' },
   { path: 'ejercicio', component: EjercicioListaComponent,  pathMatch: 'full' },
   { path: 'ejercicio/crear', component: EjercicioCrearComponent,  pathMatch: 'full' },
   { path: 'ejercicio/editar/:id', component: EjercicioEditarComponent,  pathMatch: 'full' },
