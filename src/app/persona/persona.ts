@@ -1,4 +1,4 @@
-import { Entrenamiento } from './../entrenamiento/entrenamiento';
+import { EntrenamientoEjercicio, EntrenamientoRutina } from './../entrenamiento/entrenamiento';
 export class Persona {
     id: number;
     nombre: string;
@@ -14,7 +14,8 @@ export class Persona {
     entrenando: boolean;
     terminado: Date;
     razon: string;
-    entrenamientos: Array<Entrenamiento>
+    entrenamientosEjercicio: Array<EntrenamientoEjercicio>;
+    entrenamientosRutina: Array<EntrenamientoRutina>;
 
 
     public constructor(id: number, nombre: string, apellido:string, talla: number, peso: number, edad: number,
@@ -34,6 +35,7 @@ export class Persona {
         this.entrenando = entrenando;
         this.terminado = terminado;
         this.razon = razon;
-        this.entrenamientos = [];
+        this.entrenamientosEjercicio = [];
+        this.entrenamientosRutina = [];
     }
 }

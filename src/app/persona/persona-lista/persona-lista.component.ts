@@ -2,7 +2,7 @@ import { EntrenamientoService } from './../../entrenamiento/entrenamiento.servic
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Entrenamiento } from 'src/app/entrenamiento/entrenamiento';
+import { EntrenamientoEjercicio } from 'src/app/entrenamiento/entrenamiento';
 import { Persona } from '../persona';
 import { PersonaService } from '../persona.service';
 
@@ -17,7 +17,7 @@ export class PersonaListaComponent implements OnInit {
   personas:Array<Persona> = []
   elegida: Boolean = false
   personaElegida: Persona
-  entrenamientos: Array<Entrenamiento> = []
+  entrenamientos: Array<EntrenamientoEjercicio> = []
 
   constructor(
     private routerPath: Router,
@@ -31,7 +31,7 @@ export class PersonaListaComponent implements OnInit {
   }
 
   elegir(persona: Persona): void {
-    this.entrenamientoService.darEntrenamientos(persona.id).subscribe((entrenamientos) => {
+    this.entrenamientoService.darEntrenamientosEjercicio(persona.id).subscribe((entrenamientos) => {
       this.elegida = true;
       this.personaElegida = persona;
       this.entrenamientos = entrenamientos;
@@ -80,7 +80,7 @@ export class PersonaListaComponent implements OnInit {
       if(!(personaId==null)) {
         for(let i=0;i<this.personas.length;i++) {
           if(this.personas[i].id==personaId) {
-            this.entrenamientoService.darEntrenamientos(personaId).subscribe((entrenamientos) => {
+            this.entrenamientoService.darEntrenamientosEjercicio(personaId).subscribe((entrenamientos) => {
               this.elegida = true;
               this.personaElegida = this.personas[i];
               this.entrenamientos = entrenamientos;
