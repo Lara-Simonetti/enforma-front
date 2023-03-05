@@ -2,7 +2,7 @@ import { EntrenamientoService } from './../../entrenamiento/entrenamiento.servic
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Entrenamiento } from 'src/app/entrenamiento/entrenamiento';
+import { EntrenamientoEjercicio } from 'src/app/entrenamiento/entrenamiento';
 import { Persona } from '../persona';
 import { PersonaService } from '../persona.service';
 
@@ -17,7 +17,7 @@ export class PersonaListaComponent implements OnInit {
   personas:Array<Persona> = []
   elegida: Boolean = false
   personaElegida: Persona
-  entrenamientos: Array<Entrenamiento> = []
+  entrenamientos: Array<EntrenamientoEjercicio> = []
 
   constructor(
     private routerPath: Router,

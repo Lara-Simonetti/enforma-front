@@ -6,25 +6,10 @@ import { Persona } from '../../persona/persona';
 import { PersonaService } from 'src/app/persona/persona.service';
 import { Ejercicio } from 'src/app/ejercicio/ejercicio';
 import { EjercicioService } from './../../ejercicio/ejercicio.service';
-import { Entrenamiento } from './../entrenamiento';
+import { EntrenamientoEjercicio } from './../entrenamiento';
 import { EntrenamientoService } from '../entrenamiento.service';
 import { Rutina } from 'src/app/rutina/rutina';
 import { RutinaService } from 'src/app/rutina/rutina.service';
-
-export const atLeastOne = (validator: ValidatorFn, controls:string[] = null) => (
-  group: FormGroup,
-): ValidationErrors | null => {
-  if(!controls){
-    controls = Object.keys(group.controls)
-  }
-
-  const hasAtLeastOne = group && group.controls && controls
-    .some(k => !validator(group.controls[k]));
-
-  return hasAtLeastOne ? null : {
-    atLeastOne: true,
-  };
-};
 
 @Component({
   selector: 'app-entrenamiento-crear',
@@ -35,10 +20,11 @@ export const atLeastOne = (validator: ValidatorFn, controls:string[] = null) => 
 export class EntrenamientoCrearComponent implements OnInit {
 
   persona: Persona;
-  entrenamiento: Entrenamiento;
+  entrenamiento: EntrenamientoEjercicio;
   entrenamientoForm: FormGroup;
-  ejercicios: Array<Ejercicio>
-  rutinas: Array<Rutina>
+  ejercicios: Array<Ejercicio>;
+  rutinas: Array<Rutina>;s
+  tipo: string;
 
   constructor(
     private routerPath: Router,
@@ -48,11 +34,21 @@ export class EntrenamientoCrearComponent implements OnInit {
     private personaService: PersonaService,
     private ejercicioService: EjercicioService,
     private entrenamientoService: EntrenamientoService,
-    private rutinaService: RutinaService
+    private rutinaService: RutinaService,
   ) { }
+
+  obtenerTipo() {
+    this.router.queryParams
+        .subscribe(params => {
+          this.tipo = params['tipo'] ?? 'ejercicio';
+        }
+      );
+    }
+
 
   ngOnInit() {
     const personaId = parseInt(this.router.snapshot.params['idPersona']);
+    this.obtenerTipo();
     this.personaService.darPersona(personaId).subscribe((persona) => {
         this.persona = persona
         this.rutinaService.darRutinas().subscribe((rutinas) => {
@@ -66,7 +62,6 @@ export class EntrenamientoCrearComponent implements OnInit {
             tiempo: ["", [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
             repeticiones: ["", Validators.required],
             rutina: [""],
-          //},{ validator: atLeastOne(Validators.required, ['ejercicio','rutina'])
           });
         });
       });
@@ -74,7 +69,7 @@ export class EntrenamientoCrearComponent implements OnInit {
 
   }
 
-   crearEntrenamiento(entrenamiento: Entrenamiento): void {
+   crearEntrenamiento(entrenamiento: EntrenamientoEjercicio): void {
     this.entrenamientoService.crearEntrenamientoEjercicio(entrenamiento, this.persona.id).subscribe((entrenamiento) => {
       this.toastr.success("Confirmation", "Entrenamiento creado")
       this.entrenamientoForm.reset();

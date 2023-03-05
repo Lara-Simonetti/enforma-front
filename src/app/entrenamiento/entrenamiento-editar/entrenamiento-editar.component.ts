@@ -6,7 +6,7 @@ import { Persona } from '../../persona/persona';
 import { PersonaService } from 'src/app/persona/persona.service';
 import { Ejercicio } from 'src/app/ejercicio/ejercicio';
 import { EjercicioService } from './../../ejercicio/ejercicio.service';
-import { Entrenamiento } from './../entrenamiento';
+import { EntrenamientoEjercicio } from './../entrenamiento';
 import { EntrenamientoService } from '../entrenamiento.service';
 import { formatDate } from '@angular/common';
 
@@ -18,7 +18,7 @@ import { formatDate } from '@angular/common';
 export class EntrenamientoEditarComponent implements OnInit {
 
   persona: Persona;
-  entrenamiento: Entrenamiento;
+  entrenamiento: EntrenamientoEjercicio;
   entrenamientoForm: FormGroup;
   ejercicios: Array<Ejercicio>;
   idEjercicio: number;

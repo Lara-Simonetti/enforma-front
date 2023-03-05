@@ -1,6 +1,8 @@
 import { Persona } from './../persona/persona';
 import { Ejercicio } from './../ejercicio/ejercicio';
-export class Entrenamiento {
+import { Rutina } from '../rutina/rutina';
+
+export class EntrenamientoEjercicio {
     id: number;
     ejercicio: Ejercicio;
     persona: Persona;
@@ -16,5 +18,22 @@ export class Entrenamiento {
         this.repeticiones = repeticiones;
         this.fecha = fecha;
     }
+
+}
+
+export class EntrenamientoRutina {
+  id: number;
+  rutina: Rutina;
+  persona: Persona;
+  tiempo: string;
+  fecha: Date;
+
+  public constructor(id: number, rutina: Rutina, persona: Persona, tiempo: string, fecha: Date) {
+      this.id = id;
+      this.rutina = rutina;
+      this.persona = persona;
+      this.tiempo = tiempo;
+      this.fecha = fecha;
+  }
 
 }

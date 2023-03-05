@@ -1,5 +1,5 @@
 import { Ejercicio } from "../ejercicio/ejercicio";
-import { Entrenamiento } from "../entrenamiento/entrenamiento";
+import { EntrenamientoRutina } from "../entrenamiento/entrenamiento";
 
 export class Rutina {
 
@@ -7,12 +7,12 @@ export class Rutina {
   nombre: string;
   descripcion: string;
   duracionMinutos: number;
-  entrenamientos: Array<Entrenamiento>
+  entrenamientos: Array<EntrenamientoRutina>
   ejercicioRutina: Array<Ejercicio>
 
 
   public constructor(id: number, nombre: string, descripcion:string, duracionMinutos:number,
-    entrenamientos:Array<Entrenamiento>, ejercicioRutina:Array<Ejercicio>) {
+    entrenamientos:Array<EntrenamientoRutina>, ejercicioRutina:Array<Ejercicio>) {
     this.id = id;
     this.nombre = nombre;
     this.descripcion = descripcion;
