@@ -41,7 +41,7 @@
       formControlName="rutina"
       >
       <option value="" aria-selected="true">Elija una opción</option>
-      <option *ngFor="let rutina of rutinas" value="{{ rutina }}">
+      <option *ngFor="let rutina of rutinas" value="{{ rutina.id }}">
         {{ rutina.nombre }}
       </option>
     </select>
