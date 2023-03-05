@@ -75,7 +75,7 @@ export class EntrenamientoCrearComponent implements OnInit {
   }
 
    crearEntrenamiento(entrenamiento: Entrenamiento): void {
-    this.entrenamientoService.crearEntrenamiento(entrenamiento, this.persona.id).subscribe((entrenamiento) => {
+    this.entrenamientoService.crearEntrenamientoEjercicio(entrenamiento, this.persona.id).subscribe((entrenamiento) => {
       this.toastr.success("Confirmation", "Entrenamiento creado")
       this.entrenamientoForm.reset();
       this.routerPath.navigate(['/persona/' + this.persona.id]);

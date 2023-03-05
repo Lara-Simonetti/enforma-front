@@ -31,7 +31,7 @@ export class PersonaListaComponent implements OnInit {
   }
 
   elegir(persona: Persona): void {
-    this.entrenamientoService.darEntrenamientos(persona.id).subscribe((entrenamientos) => {
+    this.entrenamientoService.darEntrenamientosEjercicio(persona.id).subscribe((entrenamientos) => {
       this.elegida = true;
       this.personaElegida = persona;
       this.entrenamientos = entrenamientos;
@@ -80,7 +80,7 @@ export class PersonaListaComponent implements OnInit {
       if(!(personaId==null)) {
         for(let i=0;i<this.personas.length;i++) {
           if(this.personas[i].id==personaId) {
-            this.entrenamientoService.darEntrenamientos(personaId).subscribe((entrenamientos) => {
+            this.entrenamientoService.darEntrenamientosEjercicio(personaId).subscribe((entrenamientos) => {
               this.elegida = true;
               this.personaElegida = this.personas[i];
               this.entrenamientos = entrenamientos;

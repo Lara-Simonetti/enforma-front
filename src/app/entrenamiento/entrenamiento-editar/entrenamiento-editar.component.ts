@@ -35,7 +35,7 @@ export class EntrenamientoEditarComponent implements OnInit {
 
   ngOnInit() {
     const entrenamientoId = parseInt(this.router.snapshot.params['id']);
-    this.entrenamientoService.darEntrenamiento(entrenamientoId).subscribe((entrenamiento) => {
+    this.entrenamientoService.darEntrenamientoEjercicio(entrenamientoId).subscribe((entrenamiento) => {
       this.entrenamiento = entrenamiento;
       this.ejercicioService.darEjercicios().subscribe((ejercicios) => {
         this.ejercicios = ejercicios;
@@ -53,7 +53,7 @@ export class EntrenamientoEditarComponent implements OnInit {
   }
 
   editarEntrenamiento(entrenamiento: any): void {
-    this.entrenamientoService.editarEntrenamiento(entrenamiento).subscribe((entrenamiento) => {
+    this.entrenamientoService.editarEntrenamientoEjercicio(entrenamiento).subscribe((entrenamiento) => {
       this.toastr.success("Confirmation", "Entrenamiento editado")
       this.entrenamientoForm.reset();
       this.routerPath.navigate(['/persona/' + this.entrenamiento.persona]);

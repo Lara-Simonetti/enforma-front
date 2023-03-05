@@ -34,7 +34,7 @@ export class EntrenamientoPersonaListaComponent implements OnInit {
   }
 
   entrenamientoEliminar(idEntrenamiento: number) {
-    this.entrenamientoService.eliminarEntrenamiento(idEntrenamiento).subscribe((entrenamiento) => {
+    this.entrenamientoService.eliminarEntrenamientoEjercicio(idEntrenamiento).subscribe((entrenamiento) => {
       this.toastr.success("Confirmation", "Entrenamiento eliminado de la lista")
       window.location.reload();
     },
