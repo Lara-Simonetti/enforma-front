@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators, ValidationErrors, ValidatorFn } from "@angular/forms";
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Persona } from '../../persona/persona';
@@ -8,18 +8,37 @@ import { Ejercicio } from 'src/app/ejercicio/ejercicio';
 import { EjercicioService } from './../../ejercicio/ejercicio.service';
 import { Entrenamiento } from './../entrenamiento';
 import { EntrenamientoService } from '../entrenamiento.service';
+import { Rutina } from 'src/app/rutina/rutina';
+import { RutinaService } from 'src/app/rutina/rutina.service';
+
+export const atLeastOne = (validator: ValidatorFn, controls:string[] = null) => (
+  group: FormGroup,
+): ValidationErrors | null => {
+  if(!controls){
+    controls = Object.keys(group.controls)
+  }
+
+  const hasAtLeastOne = group && group.controls && controls
+    .some(k => !validator(group.controls[k]));
+
+  return hasAtLeastOne ? null : {
+    atLeastOne: true,
+  };
+};
 
 @Component({
   selector: 'app-entrenamiento-crear',
   templateUrl: './entrenamiento-crear.component.html',
   styleUrls: ['./entrenamiento-crear.component.css']
 })
+
 export class EntrenamientoCrearComponent implements OnInit {
 
   persona: Persona;
   entrenamiento: Entrenamiento;
   entrenamientoForm: FormGroup;
   ejercicios: Array<Ejercicio>
+  rutinas: Array<Rutina>
 
   constructor(
     private routerPath: Router,
@@ -28,25 +47,29 @@ export class EntrenamientoCrearComponent implements OnInit {
     private toastr: ToastrService,
     private personaService: PersonaService,
     private ejercicioService: EjercicioService,
-    private entrenamientoService: EntrenamientoService
+    private entrenamientoService: EntrenamientoService,
+    private rutinaService: RutinaService
   ) { }
 
   ngOnInit() {
     const personaId = parseInt(this.router.snapshot.params['idPersona']);
     this.personaService.darPersona(personaId).subscribe((persona) => {
-      this.persona = persona
-      this.ejercicioService.darEjercicios().subscribe((ejercicios) => {
-        this.ejercicios = ejercicios
-        this.entrenamientoForm = this.formBuilder.group({
-          idPersona: this.persona.id,
-          ejercicio: ["", Validators.required],
-          fecha: [new Date(), [Validators.required, Validators.minLength(10)]],
-          tiempo: ["", [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
-          repeticiones: ["", Validators.required]
+        this.persona = persona
+        this.rutinaService.darRutinas().subscribe((rutinas) => {
+          this.rutinas = rutinas;
+        this.ejercicioService.darEjercicios().subscribe((ejercicios) => {
+          this.ejercicios = ejercicios
+          this.entrenamientoForm = this.formBuilder.group({
+            idPersona: this.persona.id,
+            ejercicio: [""],//, Validators.required],
+            fecha: [new Date(), [Validators.required, Validators.minLength(10)]],
+            tiempo: ["", [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
+            repeticiones: ["", Validators.required],
+            rutina: [""],
+          //},{ validator: atLeastOne(Validators.required, ['ejercicio','rutina'])
+          });
         });
-
       });
-
     });
 
   }

@@ -32,6 +32,21 @@
     </div>
   </div>
 
+  <!--Rutina-->
+  <div class="form-group mx-sm-3 mb-2">
+    <label for="ejercicio">Rutina</label>
+    <select
+      id="rutina"
+      class="form-control"
+      formControlName="rutina"
+      >
+      <option value="" aria-selected="true">Elija una opción</option>
+      <option *ngFor="let rutina of rutinas" value="{{ rutina }}">
+        {{ rutina.nombre }}
+      </option>
+    </select>
+  </div>
+
   <!--Fecha-->
   <div class="form-group mx-sm-3 mb-2">
     <label for="fecha">Fecha</label>
