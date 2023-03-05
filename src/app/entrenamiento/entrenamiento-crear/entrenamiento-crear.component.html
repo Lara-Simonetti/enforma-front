@@ -5,10 +5,10 @@
 
 <form
  [formGroup]="entrenamientoForm" *ngIf="entrenamientoForm"
- (ngSubmit)="!entrenamientoForm.invalid && crearEntrenamiento(entrenamientoForm.value)"
+ (ngSubmit)="!entrenamientoForm.invalid && crearEntrenamiento(entrenamientoForm)"
 >
   <!--Ejercicio-->
-  <div class="form-group mx-sm-3 mb-2">
+  <div class="form-group mx-sm-3 mb-2" *ngIf="tipo == 'ejercicio'">
     <label for="ejercicio">Ejercicio</label>
     <select
       id="ejercicio"
@@ -33,7 +33,7 @@
   </div>
 
   <!--Rutina-->
-  <div class="form-group mx-sm-3 mb-2">
+  <div class="form-group mx-sm-3 mb-2" *ngIf="tipo == 'rutina'">
     <label for="ejercicio">Rutina</label>
     <select
       id="rutina"
@@ -109,7 +109,7 @@
   </div>
 
   <!--Repeticiones-->
-  <div class="form-group mx-sm-3 mb-2">
+  <div class="form-group mx-sm-3 mb-2" *ngIf="tipo == 'ejercicio'">
     <label for="repeticiones">Repeticiones</label>
     <input
       novalidate

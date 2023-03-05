@@ -6,7 +6,7 @@ import { Persona } from '../../persona/persona';
 import { PersonaService } from 'src/app/persona/persona.service';
 import { Ejercicio } from 'src/app/ejercicio/ejercicio';
 import { EjercicioService } from './../../ejercicio/ejercicio.service';
-import { EntrenamientoEjercicio } from './../entrenamiento';
+import { EntrenamientoEjercicio, EntrenamientoRutina } from './../entrenamiento';
 import { EntrenamientoService } from '../entrenamiento.service';
 import { Rutina } from 'src/app/rutina/rutina';
 import { RutinaService } from 'src/app/rutina/rutina.service';
@@ -20,10 +20,9 @@ import { RutinaService } from 'src/app/rutina/rutina.service';
 export class EntrenamientoCrearComponent implements OnInit {
 
   persona: Persona;
-  entrenamiento: EntrenamientoEjercicio;
   entrenamientoForm: FormGroup;
   ejercicios: Array<Ejercicio>;
-  rutinas: Array<Rutina>;s
+  rutinas: Array<Rutina>;
   tipo: string;
 
   constructor(
@@ -38,55 +37,88 @@ export class EntrenamientoCrearComponent implements OnInit {
   ) { }
 
   obtenerTipo() {
-    this.router.queryParams
-        .subscribe(params => {
-          this.tipo = params['tipo'] ?? 'ejercicio';
-        }
-      );
-    }
+    this.router.queryParams.subscribe(params => {
+      this.tipo = params['tipo'] ?? 'ejercicio';
+      this.definirFormulario();
+    });
+  }
 
 
   ngOnInit() {
     const personaId = parseInt(this.router.snapshot.params['idPersona']);
-    this.obtenerTipo();
     this.personaService.darPersona(personaId).subscribe((persona) => {
-        this.persona = persona
-        this.rutinaService.darRutinas().subscribe((rutinas) => {
-          this.rutinas = rutinas;
-        this.ejercicioService.darEjercicios().subscribe((ejercicios) => {
-          this.ejercicios = ejercicios
-          this.entrenamientoForm = this.formBuilder.group({
-            idPersona: this.persona.id,
-            ejercicio: [""],//, Validators.required],
-            fecha: [new Date(), [Validators.required, Validators.minLength(10)]],
-            tiempo: ["", [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
-            repeticiones: ["", Validators.required],
-            rutina: [""],
-          });
-        });
-      });
+      this.persona = persona;
+      this.obtenerTipo();
     });
-
   }
 
-   crearEntrenamiento(entrenamiento: EntrenamientoEjercicio): void {
+  definirFormulario() {
+    if (this.tipo === 'ejercicio') {
+      this.ejercicioService.darEjercicios().subscribe((ejercicios) => {
+        this.ejercicios = ejercicios;
+        this.entrenamientoForm = this.formBuilder.group({
+          idPersona: this.persona.id,
+          ejercicio: [Validators.required],
+          fecha: [new Date(), [Validators.required, Validators.minLength(10)]],
+          tiempo: ["", [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
+          repeticiones: ["", Validators.required],
+        });
+      });
+    }
+    else if (this.tipo === 'rutina') {
+      this.rutinaService.darRutinas().subscribe((rutinas) => {
+        this.rutinas = rutinas;
+        this.entrenamientoForm = this.formBuilder.group({
+          idPersona: this.persona.id,
+          rutina: [Validators.required],
+          fecha: [new Date(), [Validators.required, Validators.minLength(10)]],
+          tiempo: ["", [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
+        });
+      });
+    }
+  }
+
+  crearEntrenamiento(entrenamientoFormGroup: FormGroup) {
+    if (this.tipo === 'ejercicio') this.crearEntrenamientoEjercicio(entrenamientoFormGroup.value);
+    else if (this.tipo === 'rutina') this.crearEntrenamientoRutina(entrenamientoFormGroup.value);
+  }
+
+  crearEntrenamientoEjercicio(entrenamiento: EntrenamientoEjercicio): void {
     this.entrenamientoService.crearEntrenamientoEjercicio(entrenamiento, this.persona.id).subscribe((entrenamiento) => {
       this.toastr.success("Confirmation", "Entrenamiento creado")
       this.entrenamientoForm.reset();
       this.routerPath.navigate(['/persona/' + this.persona.id]);
     },
-    error => {
-      if (error.statusText === "UNAUTHORIZED") {
-        this.toastr.error("Error","Su sesión ha caducado, por favor vuelva a iniciar sesión.")
-      }
-      else if (error.statusText === "UNPROCESSABLE ENTITY") {
-        this.toastr.error("Error","No hemos podido identificarlo, por favor vuelva a iniciar sesión.")
-      }
-      else {
-        this.toastr.error("Error","Ha ocurrido un error. " + error.message)
-      }
-    })
+      error => {
+        if (error.statusText === "UNAUTHORIZED") {
+          this.toastr.error("Error", "Su sesión ha caducado, por favor vuelva a iniciar sesión.")
+        }
+        else if (error.statusText === "UNPROCESSABLE ENTITY") {
+          this.toastr.error("Error", "No hemos podido identificarlo, por favor vuelva a iniciar sesión.")
+        }
+        else {
+          this.toastr.error("Error", "Ha ocurrido un error. " + error.message)
+        }
+      })
+  }
 
+  crearEntrenamientoRutina(entrenamiento: EntrenamientoRutina): void {
+    this.entrenamientoService.crearEntrenamientoRutina(entrenamiento, this.persona.id).subscribe((entrenamiento) => {
+      this.toastr.success("Confirmation", "Entrenamiento creado")
+      this.entrenamientoForm.reset();
+      this.routerPath.navigate(['/persona/' + this.persona.id]);
+    },
+      error => {
+        if (error.statusText === "UNAUTHORIZED") {
+          this.toastr.error("Error", "Su sesión ha caducado, por favor vuelva a iniciar sesión.")
+        }
+        else if (error.statusText === "UNPROCESSABLE ENTITY") {
+          this.toastr.error("Error", "No hemos podido identificarlo, por favor vuelva a iniciar sesión.")
+        }
+        else {
+          this.toastr.error("Error", "Ha ocurrido un error. " + error.message)
+        }
+      })
   }
 
   cancelarEntrenamiento(): void {
