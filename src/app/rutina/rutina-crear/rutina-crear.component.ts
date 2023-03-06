@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Rutina } from './../rutina';
 import { RutinaService } from './../rutina.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ErrorMessageMapperPipe } from 'src/app/custom-pipes/pipes/error-message-mapper.pipe';
 
 @Component({
   selector: 'app-rutina-crear',
@@ -19,8 +20,9 @@ export class RutinaCrearComponent implements OnInit {
     private formBuilder: FormBuilder,
     private routerPath: Router,
     private toastr: ToastrService,
-    private rutinaService: RutinaService
-  ) { }
+    private rutinaService: RutinaService,
+    private errorMessageMapperPipe: ErrorMessageMapperPipe
+    ) { }
 
   ngOnInit() {
     this.rutinaForm = this.formBuilder.group({
@@ -37,16 +39,8 @@ export class RutinaCrearComponent implements OnInit {
       this.routerPath.navigate(['/rutina']);
       },
     error => {
-      if (error.statusText === "UNAUTHORIZED") {
-        this.toastr.error("Error","Su sesión ha caducado, por favor vuelva a iniciar sesión.")
-      }
-      else if (error.statusText === "UNPROCESSABLE ENTITY") {
-        this.toastr.error("Error","No hemos podido identificarlo, por favor vuelva a iniciar sesión.")
-      }
-      else {
-        this.toastr.error("Error","Ha ocurrido un error. " + error.message)
-      }
-    })
+      this.toastr.error("Error", this.errorMessageMapperPipe.transform(error));
+    });
 
   }
 

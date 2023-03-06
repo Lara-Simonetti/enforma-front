@@ -10,6 +10,7 @@ import { EntrenamientoEjercicio, EntrenamientoRutina } from './../entrenamiento'
 import { EntrenamientoService } from '../entrenamiento.service';
 import { Rutina } from 'src/app/rutina/rutina';
 import { RutinaService } from 'src/app/rutina/rutina.service';
+import { ErrorMessageMapperPipe } from 'src/app/custom-pipes/pipes/error-message-mapper.pipe';
 
 @Component({
   selector: 'app-entrenamiento-crear',
@@ -34,7 +35,8 @@ export class EntrenamientoCrearComponent implements OnInit {
     private ejercicioService: EjercicioService,
     private entrenamientoService: EntrenamientoService,
     private rutinaService: RutinaService,
-  ) { }
+    private errorMessageMapperPipe: ErrorMessageMapperPipe
+    ) { }
 
   obtenerTipo() {
     this.router.queryParams.subscribe(params => {
@@ -89,17 +91,9 @@ export class EntrenamientoCrearComponent implements OnInit {
       this.entrenamientoForm.reset();
       this.routerPath.navigate(['/persona/' + this.persona.id]);
     },
-      error => {
-        if (error.statusText === "UNAUTHORIZED") {
-          this.toastr.error("Error", "Su sesión ha caducado, por favor vuelva a iniciar sesión.")
-        }
-        else if (error.statusText === "UNPROCESSABLE ENTITY") {
-          this.toastr.error("Error", "No hemos podido identificarlo, por favor vuelva a iniciar sesión.")
-        }
-        else {
-          this.toastr.error("Error", "Ha ocurrido un error. " + error.message)
-        }
-      })
+    error => {
+      this.toastr.error("Error", this.errorMessageMapperPipe.transform(error));
+    });
   }
 
   crearEntrenamientoRutina(entrenamiento: EntrenamientoRutina): void {
@@ -108,17 +102,9 @@ export class EntrenamientoCrearComponent implements OnInit {
       this.entrenamientoForm.reset();
       this.routerPath.navigate(['/persona/' + this.persona.id]);
     },
-      error => {
-        if (error.statusText === "UNAUTHORIZED") {
-          this.toastr.error("Error", "Su sesión ha caducado, por favor vuelva a iniciar sesión.")
-        }
-        else if (error.statusText === "UNPROCESSABLE ENTITY") {
-          this.toastr.error("Error", "No hemos podido identificarlo, por favor vuelva a iniciar sesión.")
-        }
-        else {
-          this.toastr.error("Error", "Ha ocurrido un error. " + error.message)
-        }
-      })
+    error => {
+      this.toastr.error("Error", this.errorMessageMapperPipe.transform(error));
+    });
   }
 
   cancelarEntrenamiento(): void {

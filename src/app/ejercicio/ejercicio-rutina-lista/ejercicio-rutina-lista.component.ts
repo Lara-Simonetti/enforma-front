@@ -5,6 +5,7 @@ import { Rutina } from 'src/app/rutina/rutina';
 import { Ejercicio } from "../ejercicio";
 import { EjercicioService } from '../ejercicio.service';
 import { RutinaService } from 'src/app/rutina/rutina.service';
+import { ErrorMessageMapperPipe } from 'src/app/custom-pipes/pipes/error-message-mapper.pipe';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class EjercicioRutinaListaComponent implements OnInit {
     private routerPath: Router,
     private toastr: ToastrService,
     private ejercicioService: EjercicioService,
-    private rutinaService: RutinaService
+    private rutinaService: RutinaService,
+    private errorMessageMapperPipe: ErrorMessageMapperPipe
     )
      { }
 
@@ -54,17 +56,8 @@ export class EjercicioRutinaListaComponent implements OnInit {
       this.agregar = false;
       },
       error => {
-        if (error.statusText === "UNAUTHORIZED") {
-          this.toastr.error("Error","Su sesión ha caducado, por favor vuelva a iniciar sesión.")
-        }
-        else if (error.statusText === "UNPROCESSABLE ENTITY") {
-          this.toastr.error("Error","No hemos podido identificarlo, por favor vuelva a iniciar sesión.")
-        }
-        else {
-          this.toastr.error("Error","Ha ocurrido un error. " + error.message)
-        }
-      })
-
+        this.toastr.error("Error", this.errorMessageMapperPipe.transform(error));
+      });
   }
 
 }

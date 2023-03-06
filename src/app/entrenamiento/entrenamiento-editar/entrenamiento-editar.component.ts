@@ -9,6 +9,7 @@ import { EjercicioService } from './../../ejercicio/ejercicio.service';
 import { EntrenamientoEjercicio } from './../entrenamiento';
 import { EntrenamientoService } from '../entrenamiento.service';
 import { formatDate } from '@angular/common';
+import { ErrorMessageMapperPipe } from 'src/app/custom-pipes/pipes/error-message-mapper.pipe';
 
 @Component({
   selector: 'app-entrenamiento-editar',
@@ -30,8 +31,9 @@ export class EntrenamientoEditarComponent implements OnInit {
     private toastr: ToastrService,
     private personaService: PersonaService,
     private ejercicioService: EjercicioService,
-    private entrenamientoService: EntrenamientoService
-) { }
+    private entrenamientoService: EntrenamientoService,
+    private errorMessageMapperPipe: ErrorMessageMapperPipe
+    ) { }
 
   ngOnInit() {
     const entrenamientoId = parseInt(this.router.snapshot.params['id']);
@@ -59,17 +61,8 @@ export class EntrenamientoEditarComponent implements OnInit {
       this.routerPath.navigate(['/persona/' + this.entrenamiento.persona]);
     },
     error => {
-      if (error.statusText === "UNAUTHORIZED") {
-        this.toastr.error("Error","Su sesión ha caducado, por favor vuelva a iniciar sesión.")
-      }
-      else if (error.statusText === "UNPROCESSABLE ENTITY") {
-        this.toastr.error("Error","No hemos podido identificarlo, por favor vuelva a iniciar sesión.")
-      }
-      else {
-        this.toastr.error("Error","Ha ocurrido un error. " + error.message)
-      }
-    })
-
+      this.toastr.error("Error", this.errorMessageMapperPipe.transform(error));
+    });
   }
 
   cancelarEntrenamiento(): void {
