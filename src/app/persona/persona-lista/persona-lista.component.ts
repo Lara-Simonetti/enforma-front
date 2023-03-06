@@ -2,7 +2,7 @@ import { EntrenamientoService } from './../../entrenamiento/entrenamiento.servic
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { EntrenamientoEjercicio } from 'src/app/entrenamiento/entrenamiento';
+import { EntrenamientoEjercicio, EntrenamientoRutina } from 'src/app/entrenamiento/entrenamiento';
 import { Persona } from '../persona';
 import { PersonaService } from '../persona.service';
 import { ErrorMessageMapperPipe } from 'src/app/custom-pipes/pipes/error-message-mapper.pipe';
@@ -18,7 +18,8 @@ export class PersonaListaComponent implements OnInit {
   personas:Array<Persona> = []
   elegida: Boolean = false
   personaElegida: Persona
-  entrenamientos: Array<EntrenamientoEjercicio> = []
+  entrenamientosEjercicio: Array<EntrenamientoEjercicio> = []
+  entrenamientosRutina: Array<EntrenamientoRutina> = []
 
   constructor(
     private routerPath: Router,
@@ -36,7 +37,10 @@ export class PersonaListaComponent implements OnInit {
     this.entrenamientoService.darEntrenamientosEjercicio(persona.id).subscribe((entrenamientos) => {
       this.elegida = true;
       this.personaElegida = persona;
-      this.entrenamientos = entrenamientos;
+      this.entrenamientosEjercicio = entrenamientos;
+    });
+    this.entrenamientoService.darEntrenamientosRutina(persona.id).subscribe((entrenamientos) => {
+      this.entrenamientosRutina = entrenamientos;
     });
   }
 
@@ -77,9 +81,11 @@ export class PersonaListaComponent implements OnInit {
             this.entrenamientoService.darEntrenamientosEjercicio(personaId).subscribe((entrenamientos) => {
               this.elegida = true;
               this.personaElegida = this.personas[i];
-              this.entrenamientos = entrenamientos;
+              this.entrenamientosEjercicio = entrenamientos;
             });
-            //i=this.personas.length;
+            this.entrenamientoService.darEntrenamientosRutina(personaId).subscribe((entrenamientos) => {
+              this.entrenamientosRutina = entrenamientos;
+            });
           }
         }
       }

@@ -7,11 +7,11 @@ import { EntrenamientoService } from '../entrenamiento.service';
 import { ErrorMessageMapperPipe } from 'src/app/custom-pipes/pipes/error-message-mapper.pipe';
 
 @Component({
-  selector: 'app-entrenamiento-persona-lista',
-  templateUrl: './entrenamiento-persona-lista.component.html',
-  styleUrls: ['./entrenamiento-persona-lista.component.css']
+  selector: 'app-entrenamiento-ejercicio-persona',
+  templateUrl: './entrenamiento-ejercicio-persona.component.html',
+  styleUrls: ['./entrenamiento-ejercicio-persona.component.css']
 })
-export class EntrenamientoPersonaListaComponent implements OnInit {
+export class EntrenamientoEjercicioPersonaComponent implements OnInit {
 
   @Input() personaDetalle: Persona;
   @Input() entrenamientos: Array<EntrenamientoEjercicio>;
