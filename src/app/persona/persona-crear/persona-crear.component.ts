@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Persona } from '../persona';
 import { PersonaService } from '../persona.service';
+import { ErrorMessageMapperPipe } from 'src/app/custom-pipes/pipes/error-message-mapper.pipe';
 
 @Component({
   selector: 'app-persona-crear',
@@ -18,8 +19,9 @@ export class PersonaCrearComponent implements OnInit {
     private formBuilder: FormBuilder,
     private routerPath: Router,
     private toastr: ToastrService,
-    private personaService: PersonaService
-  ) { }
+    private personaService: PersonaService,
+    private errorMessageMapperPipe: ErrorMessageMapperPipe
+    ) { }
 
   ngOnInit() {
     this.personaForm = this.formBuilder.group({
@@ -46,16 +48,8 @@ export class PersonaCrearComponent implements OnInit {
       this.routerPath.navigate(['/persona/' + persona.id]);
     },
     error => {
-      if (error.statusText === "UNAUTHORIZED") {
-        this.toastr.error("Error","Su sesión ha caducado, por favor vuelva a iniciar sesión.")
-      }
-      else if (error.statusText === "UNPROCESSABLE ENTITY") {
-        this.toastr.error("Error","No hemos podido identificarlo, por favor vuelva a iniciar sesión.")
-      }
-      else {
-        this.toastr.error("Error","Ha ocurrido un error. " + error.message)
-      }
-    })
+      this.toastr.error("Error", this.errorMessageMapperPipe.transform(error));
+    });
 
   }
 

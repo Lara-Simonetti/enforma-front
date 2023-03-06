@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { EntrenamientoEjercicio } from 'src/app/entrenamiento/entrenamiento';
 import { Persona } from '../persona';
 import { PersonaService } from '../persona.service';
+import { ErrorMessageMapperPipe } from 'src/app/custom-pipes/pipes/error-message-mapper.pipe';
 
 @Component({
   selector: 'app-persona-lista',
@@ -24,8 +25,9 @@ export class PersonaListaComponent implements OnInit {
     private router: ActivatedRoute,
     private toastr: ToastrService,
     private personaService: PersonaService,
-    private entrenamientoService: EntrenamientoService
-  ) { }
+    private entrenamientoService: EntrenamientoService,
+    private errorMessageMapperPipe: ErrorMessageMapperPipe
+    ) { }
 
   darPersonas(): void {
   }
@@ -52,16 +54,8 @@ export class PersonaListaComponent implements OnInit {
       this.ngOnInit();
     },
     error => {
-      if (error.statusText === "UNAUTHORIZED") {
-        this.toastr.error("Error","Su sesión ha caducado, por favor vuelva a iniciar sesión.")
-      }
-      else if (error.statusText === "UNPROCESSABLE ENTITY") {
-        this.toastr.error("Error","No hemos podido identificarlo, por favor vuelva a iniciar sesión.")
-      }
-      else {
-        this.toastr.error("Error","Ha ocurrido un error. " + error.message)
-      }
-    });
+      this.toastr.error("Error", this.errorMessageMapperPipe.transform(error));
+    });;
   }
 
   personaReporte(idPersona: number): void {

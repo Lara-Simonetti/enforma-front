@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Ejercicio } from './../ejercicio';
 import { EjercicioService } from '../ejercicio.service';
+import { ErrorMessageMapperPipe } from 'src/app/custom-pipes/pipes/error-message-mapper.pipe';
 
 @Component({
   selector: 'app-ejercicio-lista',
@@ -15,7 +16,8 @@ export class EjercicioListaComponent implements OnInit {
   constructor(
     private routerPath: Router,
     private toastr: ToastrService,
-    private ejercicioService: EjercicioService
+    private ejercicioService: EjercicioService,
+    private errorMessageMapperPipe: ErrorMessageMapperPipe
   ) { }
 
   ejercicioCrear(): void {
@@ -31,17 +33,9 @@ export class EjercicioListaComponent implements OnInit {
       this.toastr.success("Confirmation", "Ejercicio eliminado")
       window.location.reload();
       },
-      error => {
-        if (error.statusText === "UNAUTHORIZED") {
-          this.toastr.error("Error","Su sesión ha caducado, por favor vuelva a iniciar sesión.")
-        }
-        else if (error.statusText === "UNPROCESSABLE ENTITY") {
-          this.toastr.error("Error","No hemos podido identificarlo, por favor vuelva a iniciar sesión.")
-        }
-        else {
-          this.toastr.error("Error","Ha ocurrido un error. " + error.message)
-        }
-      })
+    error => {
+      this.toastr.error("Error", this.errorMessageMapperPipe.transform(error));
+    });
 
   }
 
