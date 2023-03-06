@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
+import { CustomPipesModule } from "./custom-pipes/custom-pipes.module";
 import { AppComponent } from './app.component';
 import { UsuarioModule } from './usuario/usuario.module';
 import { PersonaModule } from './persona/persona.module';
@@ -23,6 +24,7 @@ import { RutinaModule } from "./rutina/rutina.module";
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    CustomPipesModule,
     UsuarioModule,
     PersonaModule,
     EjercicioModule,
