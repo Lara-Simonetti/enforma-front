@@ -21,8 +21,15 @@
           <!--Tabla de ejercicios en la rutina-->
             <table>
               <tbody>
+                <tr>
+                  <th>Nombre del ejercicio&nbsp;</th>
+                  <th>Duración&nbsp;</th>
+                  <th>Repeticiones&nbsp;</th>
+                </tr>
                 <tr *ngFor="let ejercicio of rutinaDetalle.ejercicioRutina">
                   <td>{{ejercicio.nombre}}</td>
+                  <td>{{ejercicio.duracionRutina | number}}</td>
+                  <td>{{ejercicio.repeticionesRutina | number}}</td>
                 </tr>
               </tbody>
             </table>
