@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { PersonaService } from '../persona.service';
 import { Persona } from '../persona';
 import { catchError, of } from 'rxjs';
+import { ROLES } from "../../roles";
 
 @Component({
   selector: 'app-persona-principal',
@@ -16,11 +18,18 @@ export class PersonaPrincipalComponent implements OnInit {
   constructor(
     private routerPath: Router,
     private router: ActivatedRoute,
+    private toastr: ToastrService,
     private personaService: PersonaService
   ) { }
 
   ngOnInit() {
-    this.detallePersona();
+    const rol = sessionStorage.getItem('rol');
+    if (rol !== ROLES.persona) {
+      this.toastr.error('Error', 'El Usuario no está autorizado');
+      this.routerPath.navigate(['']);
+    } else {
+      this.detallePersona();
+    }
   }
 
   detallePersona(): void {
@@ -32,8 +41,12 @@ export class PersonaPrincipalComponent implements OnInit {
             return of(null);
           })
         ).subscribe((persona) => {
-          if(persona) this.persona = persona;
-          else this.routerPath.navigate(['']);
+          if(persona) {
+            this.persona = persona;
+          } else {
+            this.toastr.error('Error', 'No se ha encontrado al usuario');
+            this.routerPath.navigate(['']);
+          }
         });
     } else {
       this.routerPath.navigate(['']);
