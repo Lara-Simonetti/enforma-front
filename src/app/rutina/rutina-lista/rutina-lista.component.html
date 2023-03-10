@@ -6,6 +6,11 @@
         Rutinas <button type="button" class="btn btn-warning"  (click)="rutinaCrear()"><i class="bi bi-plus-circle"></i></button>
       </div>
       <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+          </tr>
+        </thead>
         <tbody>
           <tr *ngFor="let rutina of rutinas">
             <td>{{rutina.nombre}}</td>
