@@ -25,6 +25,7 @@ export class UsuarioLoginComponent implements OnInit {
     sessionStorage.setItem('decodedToken', '');
     sessionStorage.setItem('token', '');
     sessionStorage.setItem('idUsuario', '');
+    sessionStorage.setItem('rol', '');
   }
 
   loginUsuario(usuario: string, contrasena: string) {
@@ -35,6 +36,7 @@ export class UsuarioLoginComponent implements OnInit {
         sessionStorage.setItem('decodedToken', this.helper.decodeToken(res.token));
         sessionStorage.setItem('token', res.token);
         sessionStorage.setItem('idUsuario', res.id);
+        sessionStorage.setItem('rol', res.rol);
 
         this.toastrService.success("Login ok", "Información", {closeButton: true});
         this.redireccionarUsuario(res.rol);
@@ -47,7 +49,10 @@ export class UsuarioLoginComponent implements OnInit {
   redireccionarUsuario(rol: string): void {
     if(rol === ROLES.persona) {
       this.router.navigate([`/principal`]);
-    } else {
+    } else if (rol === ROLES.entrenador){
+      this.router.navigate([`/persona`]);
+    }
+    else {
       this.router.navigate([`/persona`]);
     }
 
