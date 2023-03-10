@@ -8,15 +8,16 @@ import { ROLES } from 'src/app/roles';
 })
 export class EncabezadoComponent implements OnInit {
 
-  public rol = ''
-  public entrenador = false
+  public rol: string;
+  public entrenador: boolean = false
+  public persona: boolean = false
+
   constructor() { }
 
   ngOnInit() {
     this.rol = sessionStorage.getItem('rol');
-    if(this.rol === ROLES.entrenador){
-      this.entrenador = true;
-    }
+    this.entrenador = this.rol === ROLES.entrenador;
+    this.persona = this.rol === ROLES.persona;
   }
 
 }
