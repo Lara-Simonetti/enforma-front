@@ -11,7 +11,7 @@
             <td>{{rutina.nombre}}</td>
             <td>
               <button type="button" class="btn btn-warning" (click)="elegir(rutina)"><i class="bi bi-eye"></i></button>&nbsp;
-              <button type="button" class="btn btn-primary" ><i class="bi bi-pencil"></i></button>&nbsp;
+              <button type="button" class="btn btn-primary" (click)="editarRutina(rutina.id)"><i class="bi bi-pencil"></i></button>&nbsp;
               <button type="button" class="btn btn-danger" ><i class="bi bi-trash"></i></button>&nbsp;
             </td>
           </tr>

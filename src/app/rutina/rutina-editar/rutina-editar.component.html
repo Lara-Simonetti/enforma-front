@@ -1,11 +1,11 @@
 <app-encabezado></app-encabezado>
 <h3>
-  Rutina nueva
+  Editar rutina
 </h3>
 
 <form
- [formGroup]="rutinaForm" 
- (ngSubmit)="!rutinaForm.invalid && crearRutina(rutinaForm.value)"
+ [formGroup]="rutinaForm" *ngIf="rutinaForm"
+ (ngSubmit)="!rutinaForm.invalid && editarRutina(rutinaForm.value)"
 >
   <!--Nombre-->
   <div class="form-group mx-sm-3 mb-2">
@@ -83,6 +83,6 @@
     </div>
   </div>
 
-  <button type="submit" class="btn btn-primary" [disabled]="!rutinaForm.valid">Crear</button>
+  <button type="submit" class="btn btn-primary" [disabled]="!rutinaForm.valid">Editar</button>
   <button type="button" class="btn btn-danger ml-3" (click)="cancelarRutina()">Cancelar</button>
 </form>

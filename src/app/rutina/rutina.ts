@@ -6,17 +6,17 @@ export class Rutina {
   id: number;
   nombre: string;
   descripcion: string;
-  duracionMinutos: number;
+  duracion_minutos: number;
   entrenamientos: Array<EntrenamientoRutina>
   ejercicioRutina: Array<Ejercicio>
 
 
-  public constructor(id: number, nombre: string, descripcion:string, duracionMinutos:number,
+  public constructor(id: number, nombre: string, descripcion:string, duracion_minutos:number,
     entrenamientos:Array<EntrenamientoRutina>, ejercicioRutina:Array<Ejercicio>) {
     this.id = id;
     this.nombre = nombre;
     this.descripcion = descripcion;
-    this.duracionMinutos = duracionMinutos;
+    this.duracion_minutos = duracion_minutos;
     this.entrenamientos = entrenamientos;
     this.ejercicioRutina = ejercicioRutina;
   }
