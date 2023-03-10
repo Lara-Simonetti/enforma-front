@@ -61,27 +61,6 @@
     </div>
   </div>
 
-  <!--Calorías-->
-  <div class="form-group mx-sm-3 mb-2">
-    <label for="duracion_minutos">Duracion en minutos de la rutina</label>
-    <input
-      novalidate
-      id="duracion_minutos"
-      class="form-control"
-      type="number"
-      formControlName="duracion_minutos"
-      placeholder="Duracion minutos"
-    />
-    <div
-      class="alert alert-danger alert-dismissible fade show"
-      *ngIf="
-        rutinaForm.get('duracion_minutos')!.hasError('required') &&
-        rutinaForm.get('duracion_minutos')!.touched
-      "
-    >
-      La duracion es requerida
-    </div>
-  </div>
 
   <button type="submit" class="btn btn-primary" [disabled]="!rutinaForm.valid">Crear</button>
   <button type="button" class="btn btn-danger ml-3" (click)="cancelarRutina()">Cancelar</button>

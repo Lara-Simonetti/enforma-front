@@ -28,7 +28,7 @@ export class RutinaCrearComponent implements OnInit {
     this.rutinaForm = this.formBuilder.group({
       nombre: ["", [Validators.required, Validators.minLength(2)]],
       descripcion: ["", [Validators.required, Validators.maxLength(300)]],
-      duracion_minutos: ["", Validators.required]
+      duracion_minutos: [0, Validators.required]
     });
   }
 
