@@ -18,6 +18,12 @@ export class RutinaService {
     return this.http.get<Rutina[]>(`${this.apiUrl}/rutina`, { headers: headers })
   }
 
+  darRutina(id: number): Observable<Rutina> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+    })
+    return this.http.get<Rutina>(`${this.apiUrl}/rutina/${id}`, { headers: headers })
+  }
   crearRutina(rutina): Observable<Rutina>{
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${sessionStorage.getItem('token')}`

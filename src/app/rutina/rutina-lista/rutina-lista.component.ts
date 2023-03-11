@@ -31,6 +31,9 @@ export class RutinaListaComponent implements OnInit {
     this.routerPath.navigate(['/rutina/crear/']);
   }
 
+  editarRutina(rutinaId: number): void {
+    this.routerPath.navigate(['/rutina/editar/' + rutinaId]);
+  }
   ngOnInit() {
     this.rutinaService.darRutinas().subscribe((rutinas) => {
 
