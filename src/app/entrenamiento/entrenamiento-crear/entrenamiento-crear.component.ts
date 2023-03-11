@@ -73,8 +73,7 @@ export class EntrenamientoCrearComponent implements OnInit {
         this.entrenamientoForm = this.formBuilder.group({
           idPersona: this.persona.id,
           rutina: [Validators.required],
-          fecha: [new Date(), [Validators.required, Validators.minLength(10)]],
-          tiempo: ["", [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
+          fecha: [new Date(), [Validators.required, Validators.minLength(10)]]
         });
       });
     }
