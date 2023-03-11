@@ -49,11 +49,14 @@ export class UsuarioLoginComponent implements OnInit {
   redireccionarUsuario(rol: string): void {
     if(rol === ROLES.persona) {
       this.router.navigate([`/principal`]);
-    } else if (rol === ROLES.entrenador){
+    }
+
+    if(rol === ROLES.entrenador) {
       this.router.navigate([`/persona`]);
     }
-    else {
-      this.router.navigate([`/persona`]);
+
+    if(rol === ROLES.admin){
+      this.router.navigate([`/entrenador`]);
     }
 
   }

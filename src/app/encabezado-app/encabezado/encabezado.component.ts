@@ -8,9 +8,10 @@ import { ROLES } from 'src/app/roles';
 })
 export class EncabezadoComponent implements OnInit {
 
-  public rol = ''
+  public rol = '';
   public entrenador = false;
   public cliente = false;
+  public admin = false;
   constructor() { }
 
   ngOnInit() {
@@ -20,6 +21,9 @@ export class EncabezadoComponent implements OnInit {
     }
     if(this.rol === ROLES.persona){
       this.cliente = true;
+    }
+    if(this.rol === ROLES.admin){
+      this.admin = true;
     }
   }
 
