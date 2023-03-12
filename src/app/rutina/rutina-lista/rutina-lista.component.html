@@ -14,7 +14,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let rutina of rutinas">
-            <td>{{rutina.nombre}}</td>
+            <td>{{ (rutina.nombre.length > 25) ? (rutina.nombre | slice:0:22)+'...':(rutina.nombre) }}</td>
             <td>{{rutina.duracion_minutos}}</td>
             <td>
               <button type="button" class="btn btn-warning" (click)="elegir(rutina)"><i class="bi bi-eye"></i></button>&nbsp;
