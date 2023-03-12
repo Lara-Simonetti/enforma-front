@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { PersonaService } from '../persona.service';
 import { Persona } from '../persona';
 import { catchError, of } from 'rxjs';
+import { EntrenamientoService } from 'src/app/entrenamiento/entrenamiento.service';
 import { ROLES } from "../../roles";
 
 @Component({
@@ -13,13 +14,16 @@ import { ROLES } from "../../roles";
 })
 export class PersonaPrincipalComponent implements OnInit {
 
-  persona: Persona;
+  public persona: Persona;
+  public rutinas = [];
+  public ejercicios = [];
 
   constructor(
     private routerPath: Router,
     private router: ActivatedRoute,
     private toastr: ToastrService,
-    private personaService: PersonaService
+    private personaService: PersonaService,
+    private entrenamientoService: EntrenamientoService
   ) { }
 
   ngOnInit() {
@@ -47,6 +51,12 @@ export class PersonaPrincipalComponent implements OnInit {
             this.toastr.error('Error', 'No se ha encontrado al usuario');
             this.routerPath.navigate(['']);
           }
+          this.entrenamientoService.darEntrenamientosEjercicio(idUsuario).subscribe(ejercicios => {
+            this.ejercicios = ejercicios;
+          })
+          this.entrenamientoService.darEntrenamientosRutina(idUsuario).subscribe(rutinas => {
+            this.rutinas = rutinas;
+          })
         });
     } else {
       this.routerPath.navigate(['']);

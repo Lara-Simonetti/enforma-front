@@ -63,7 +63,6 @@ export class PersonaListaComponent implements OnInit {
   }
 
   personaReporte(idPersona: number): void {
-    console.log("si")
     this.routerPath.navigate(['/persona/reporte/' + idPersona]);
   }
 

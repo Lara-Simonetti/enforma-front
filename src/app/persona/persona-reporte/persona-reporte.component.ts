@@ -43,7 +43,6 @@ export class PersonaReporteComponent implements OnInit {
 
   darReporte(idPersona: number): void {
     this.personaService.darReporte(idPersona).subscribe((reporte) => {
-      console.log(reporte)
       this.persona = reporte.persona
       this.imc = reporte.imc
       this.clasificacion = reporte.clasificacion_imc

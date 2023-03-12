@@ -25,7 +25,7 @@ export class PersonaService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${sessionStorage.getItem('token')}`
     })
-    return this.http.post<Persona>(`${this.apiUrl}/personas/${idUsuario}`, persona, { headers: headers })
+    return this.http.post<Persona>(`${this.apiUrl}personas/${idUsuario}`, persona, { headers: headers })
   }
 
   darPersona(id: number): Observable<Persona> {

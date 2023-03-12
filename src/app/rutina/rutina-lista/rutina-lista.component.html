@@ -6,9 +6,16 @@
         Rutinas <button type="button" class="btn btn-warning"  (click)="rutinaCrear()"><i class="bi bi-plus-circle"></i></button>
       </div>
       <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Duración</th>
+          </tr>
+        </thead>
         <tbody>
           <tr *ngFor="let rutina of rutinas">
             <td>{{rutina.nombre}}</td>
+            <td>{{rutina.duracion_minutos}}</td>
             <td>
               <button type="button" class="btn btn-warning" (click)="elegir(rutina)"><i class="bi bi-eye"></i></button>&nbsp;
               <button type="button" class="btn btn-primary" (click)="editarRutina(rutina.id)"><i class="bi bi-pencil"></i></button>&nbsp;
