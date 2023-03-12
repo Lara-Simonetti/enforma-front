@@ -32,6 +32,12 @@
     >
       El nombre es muy corto, debe tener al menos dos caracteres.
     </div>
+    <div
+      class="alert alert-danger alert-dismissible fade show"
+      *ngIf="rutinaForm.get('nombre')!.hasError('maxlength')"
+    >
+      El nombre es muy largo, debe tener máximo 50 caracteres.
+    </div>
   </div>
 
   <!--Descripción-->
