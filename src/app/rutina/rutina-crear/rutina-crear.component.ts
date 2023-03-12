@@ -26,7 +26,11 @@ export class RutinaCrearComponent implements OnInit {
 
   ngOnInit() {
     this.rutinaForm = this.formBuilder.group({
-      nombre: ["", [Validators.required, Validators.minLength(2)]],
+      nombre: ["", [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(50)
+      ]],
       descripcion: ["", [Validators.required, Validators.maxLength(300)]],
       duracion_minutos: [0, Validators.required]
     });

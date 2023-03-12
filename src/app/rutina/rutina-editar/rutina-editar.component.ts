@@ -33,11 +33,11 @@ export class RutinaEditarComponent implements OnInit {
     this.rutinaService.darRutina(id).subscribe((rutina) => {
       this.rutina = rutina
       this.rutinaForm = this.formBuilder.group({
-      id: [this.rutina.id, []],
-      nombre: [this.rutina.nombre, [Validators.required, Validators.minLength(2)]],
-      descripcion: [this.rutina.descripcion, [Validators.required, Validators.maxLength(300)]],
-      duracion_minutos: [this.rutina.duracion_minutos, Validators.required],
-      ejercicioRutina: [this.rutina.ejercicioRutina, []]
+        id: [this.rutina.id, []],
+        nombre: [this.rutina.nombre, [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+        descripcion: [this.rutina.descripcion, [Validators.required, Validators.maxLength(300)]],
+        duracion_minutos: [this.rutina.duracion_minutos, Validators.required],
+        ejercicioRutina: [this.rutina.ejercicioRutina, []]
     });
   });
   }
