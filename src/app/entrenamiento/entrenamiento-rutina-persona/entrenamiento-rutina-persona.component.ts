@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Persona } from 'src/app/persona/persona';
+import { Rutina } from 'src/app/rutina/rutina';
 import { EntrenamientoRutina } from '../entrenamiento';
 import { EntrenamientoService } from '../entrenamiento.service';
 
@@ -14,6 +15,7 @@ export class EntrenamientoRutinaPersonaComponent implements OnInit {
 
   @Input() personaDetalle: Persona;
   @Input() entrenamientos: Array<EntrenamientoRutina>;
+  public rutinas: EntrenamientoRutina[] = []
 
   constructor(
     private routerPath: Router,
@@ -23,6 +25,9 @@ export class EntrenamientoRutinaPersonaComponent implements OnInit {
      { }
 
   ngOnInit() {
+    this.entrenamientoService.darEntrenamientosRutina(this.personaDetalle.id).subscribe(rutinas => {
+      this.rutinas = rutinas;
+    })
   }
 
   entrenamientoCrear() {

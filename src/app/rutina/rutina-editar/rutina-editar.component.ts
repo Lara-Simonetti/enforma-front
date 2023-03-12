@@ -32,8 +32,6 @@ export class RutinaEditarComponent implements OnInit {
 
     this.rutinaService.darRutina(id).subscribe((rutina) => {
       this.rutina = rutina
-      console.log(this.rutina);
-      console.log(Number(this.rutina.duracion_minutos));
       this.rutinaForm = this.formBuilder.group({
       id: [this.rutina.id, []],
       nombre: [this.rutina.nombre, [Validators.required, Validators.minLength(2)]],

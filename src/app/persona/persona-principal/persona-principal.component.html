@@ -26,18 +26,51 @@
     <div class="card" style="width: 100%;">
       <div class="card-body">
         <h5 class="card-title">Entrenamientos</h5>
-        <p class="card-text" *ngIf="persona">
-        </p>
+        <div class="card-text" *ngIf="persona">
+          <table class="table table-striped" border="1">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Fecha</th>
+                <th>Duración</th>
+                <th>Repeticiones</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let ejercicio of ejercicios">
+              <tr> 
+                <td>{{ejercicio.ejercicio.nombre}}</td>
+                <td>{{ejercicio.fecha}}</td>
+                <td>{{ejercicio.ejercicio.duracionRutina | number }}</td>
+                <td>{{ejercicio.ejercicio.repeticionesRutina | number}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
-
   <div class="col col-12">
     <div class="card" style="width: 100%;">
       <div class="card-body">
         <h5 class="card-title">Rutinas</h5>
-        <p class="card-text" *ngIf="persona">
-        </p>
+        <div class="card-text" *ngIf="persona">
+          <table class="table table-striped" border="1">
+            <thead>
+              <tr>
+                <th>Rutina</th>
+                <th>Duración</th>
+                <th>Fecha</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let rutina of rutinas">
+              <tr> 
+                <td>{{rutina.rutina.nombre}}</td>
+                <td>{{rutina.tiempo}}</td>
+                <td>{{rutina.fecha}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
