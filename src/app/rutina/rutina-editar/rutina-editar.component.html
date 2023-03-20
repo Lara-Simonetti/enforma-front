@@ -1,0 +1,72 @@
+<app-encabezado></app-encabezado>
+<h3>
+  Editar rutina
+</h3>
+
+<form
+ [formGroup]="rutinaForm" *ngIf="rutinaForm"
+ (ngSubmit)="!rutinaForm.invalid && editarRutina(rutinaForm.value)"
+>
+  <!--Nombre-->
+  <div class="form-group mx-sm-3 mb-2">
+    <label for="nombre">Nombre</label>
+    <input
+      novalidate
+      id="nombre"
+      class="form-control"
+      formControlName="nombre"
+      placeholder="Nombre de la rutina"
+    />
+    <div
+      class="alert alert-danger alert-dismissible fade show"
+      *ngIf="
+        rutinaForm.get('nombre')!.hasError('required') &&
+        rutinaForm.get('nombre')!.touched
+      "
+    >
+      Nombre requerido
+    </div>
+    <div
+      class="alert alert-danger alert-dismissible fade show"
+      *ngIf="rutinaForm.get('nombre')!.hasError('minlength')"
+    >
+      El nombre es muy corto, debe tener al menos dos caracteres.
+    </div>
+    <div
+      class="alert alert-danger alert-dismissible fade show"
+      *ngIf="rutinaForm.get('nombre')!.hasError('maxlength')"
+    >
+      El nombre es muy largo, debe tener máximo 50 caracteres.
+    </div>
+  </div>
+
+  <!--Descripción-->
+  <div class="form-group mx-sm-3 mb-2">
+    <label for="descripcion">Descripción</label>
+    <input
+      novalidate
+      id="descripcion"
+      class="form-control"
+      formControlName="descripcion"
+      placeholder="Descripción de la rutina"
+    />
+    <div
+      class="alert alert-danger alert-dismissible fade show"
+      *ngIf="
+        rutinaForm.get('descripcion')!.hasError('required') &&
+        rutinaForm.get('descripcion')!.touched
+      "
+    >
+      Descripción requerida
+    </div>
+    <div
+      class="alert alert-danger alert-dismissible fade show"
+      *ngIf="rutinaForm.get('descripcion')!.hasError('maxlength')"
+    >
+      La descripción es demasiado larga, debe tener máximo 100 caracteres
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="!rutinaForm.valid">Editar</button>
+  <button type="button" class="btn btn-danger ml-3" (click)="cancelarRutina()">Cancelar</button>
+</form>

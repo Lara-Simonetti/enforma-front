@@ -5,10 +5,10 @@
 
 <form
  [formGroup]="entrenamientoForm" *ngIf="entrenamientoForm"
- (ngSubmit)="!entrenamientoForm.invalid && crearEntrenamiento(entrenamientoForm.value)"
+ (ngSubmit)="!entrenamientoForm.invalid && crearEntrenamiento(entrenamientoForm)"
 >
   <!--Ejercicio-->
-  <div class="form-group mx-sm-3 mb-2">
+  <div class="form-group mx-sm-3 mb-2" *ngIf="tipo == 'ejercicio'">
     <label for="ejercicio">Ejercicio</label>
     <select
       id="ejercicio"
@@ -30,6 +30,21 @@
     >
       Este campo debe estar diligenciado
     </div>
+  </div>
+
+  <!--Rutina-->
+  <div class="form-group mx-sm-3 mb-2" *ngIf="tipo == 'rutina'">
+    <label for="ejercicio">Rutina</label>
+    <select
+      id="rutina"
+      class="form-control"
+      formControlName="rutina"
+      >
+      <option value="" aria-selected="true">Elija una opción</option>
+      <option *ngFor="let rutina of rutinas" value="{{ rutina.id }}">
+        {{ rutina.nombre }}
+      </option>
+    </select>
   </div>
 
   <!--Fecha-->
@@ -61,7 +76,7 @@
   </div>
 
   <!--Tiempo-->
-  <div class="form-group mx-sm-3 mb-2">
+  <div class="form-group mx-sm-3 mb-2" *ngIf="tipo == 'ejercicio'">
     <label for="duracion">Duración</label>
     <input
       novalidate
@@ -94,7 +109,7 @@
   </div>
 
   <!--Repeticiones-->
-  <div class="form-group mx-sm-3 mb-2">
+  <div class="form-group mx-sm-3 mb-2" *ngIf="tipo == 'ejercicio'">
     <label for="repeticiones">Repeticiones</label>
     <input
       novalidate

@@ -7,11 +7,16 @@ import { PersonaCrearComponent } from './persona/persona-crear/persona-crear.com
 import { PersonaEditarComponent } from './persona/persona-editar/persona-editar.component';
 import { PersonaTerminarComponent } from './persona/persona-terminar/persona-terminar.component';
 import { PersonaReporteComponent } from './persona/persona-reporte/persona-reporte.component';
+import { PersonaPrincipalComponent } from './persona/persona-principal/persona-principal.component';
 import { EjercicioListaComponent } from './ejercicio/ejercicio-lista/ejercicio-lista.component';
 import { EjercicioCrearComponent } from './ejercicio/ejercicio-crear/ejercicio-crear.component';
 import { EjercicioEditarComponent } from './ejercicio/ejercicio-editar/ejercicio-editar.component';
 import { EntrenamientoCrearComponent } from './entrenamiento/entrenamiento-crear/entrenamiento-crear.component';
 import { EntrenamientoEditarComponent } from './entrenamiento/entrenamiento-editar/entrenamiento-editar.component';
+import { RutinaListaComponent } from "./rutina/rutina-lista/rutina-lista.component";
+import { EntrenadorListaComponent } from './entrenador/entrenador-lista/entrenador-lista.component';
+import { RutinaCrearComponent} from  "./rutina/rutina-crear/rutina-crear.component";
+import { RutinaEditarComponent } from './rutina/rutina-editar/rutina-editar.component';
 
 const routes: Routes = [
   { path: '', component: UsuarioLoginComponent, pathMatch: 'full' },
@@ -22,12 +27,17 @@ const routes: Routes = [
   { path: 'persona/editar/:id', component: PersonaEditarComponent,  pathMatch: 'full' },
   { path: 'persona/reporte/:id', component: PersonaReporteComponent,  pathMatch: 'full' },
   { path: 'persona/terminar/:id', component: PersonaTerminarComponent,  pathMatch: 'full' },
+  { path: 'principal', component: PersonaPrincipalComponent,  pathMatch: 'full' },
   { path: 'ejercicio', component: EjercicioListaComponent,  pathMatch: 'full' },
   { path: 'ejercicio/crear', component: EjercicioCrearComponent,  pathMatch: 'full' },
   { path: 'ejercicio/editar/:id', component: EjercicioEditarComponent,  pathMatch: 'full' },
   { path: 'entrenamiento/crear/:idPersona', component: EntrenamientoCrearComponent,  pathMatch: 'full' },
-  { path: 'entrenamiento/editar/:id', component: EntrenamientoEditarComponent,  pathMatch: 'full' }
-
+  { path: 'entrenamiento/editar/:id', component: EntrenamientoEditarComponent,  pathMatch: 'full' },
+  { path: 'rutina', component: RutinaListaComponent,  pathMatch: 'full' },
+  { path: 'entrenador', component: EntrenadorListaComponent,  pathMatch: 'full' },
+  { path: 'rutina/crear', component: RutinaCrearComponent,  pathMatch: 'full' },
+  { path: 'rutina/editar/:id', component: RutinaEditarComponent,  pathMatch: 'full' },
+  { path: 'rutina/:id', component: RutinaListaComponent,  pathMatch: 'full' }
 ];
 
 @NgModule({

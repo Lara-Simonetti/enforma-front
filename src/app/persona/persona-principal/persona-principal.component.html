@@ -1,0 +1,77 @@
+<app-encabezado></app-encabezado>
+
+<div class="row">
+  <div class="col col-12" id="pesona-principal-title">
+    <h3 *ngIf="persona">{{persona.nombre}}&nbsp;{{persona.apellido}}</h3>&nbsp;
+    <h3 *ngIf="!persona">Cliente</h3>&nbsp;
+    <button type="button" class="btn btn-primary" [disabled]="!persona" (click)="personaReporte(persona.id)"><i class="bi bi-clipboard-heart"></i>&nbsp;Reporte</button>
+  </div>
+</div>
+<br/>
+
+
+<div class="row">
+  <div class="col col-12">
+    <div class="card" style="width: 100%;">
+      <div class="card-body">
+        <h5 class="card-title">Información Personal</h5>
+        <p class="card-text" *ngIf="persona">
+          <app-persona-detalle [personaDetalle]="persona"></app-persona-detalle>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col col-12">
+    <div class="card" style="width: 100%;">
+      <div class="card-body">
+        <h5 class="card-title">Entrenamientos</h5>
+        <div class="card-text" *ngIf="persona">
+          <table class="table table-striped" border="1">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Fecha</th>
+                <th>Duración</th>
+                <th>Repeticiones</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let ejercicio of ejercicios">
+              <tr> 
+                <td>{{ejercicio.ejercicio.nombre}}</td>
+                <td>{{ejercicio.fecha}}</td>
+                <td>{{ejercicio.ejercicio.duracionRutina | number }}</td>
+                <td>{{ejercicio.ejercicio.repeticionesRutina | number}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col col-12">
+    <div class="card" style="width: 100%;">
+      <div class="card-body">
+        <h5 class="card-title">Rutinas</h5>
+        <div class="card-text" *ngIf="persona">
+          <table class="table table-striped" border="1">
+            <thead>
+              <tr>
+                <th>Rutina</th>
+                <th>Duración</th>
+                <th>Fecha</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let rutina of rutinas">
+              <tr> 
+                <td>{{rutina.rutina.nombre}}</td>
+                <td>{{rutina.tiempo}}</td>
+                <td>{{rutina.fecha}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

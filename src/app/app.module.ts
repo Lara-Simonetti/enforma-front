@@ -6,11 +6,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
+import { CustomPipesModule } from "./custom-pipes/custom-pipes.module";
 import { AppComponent } from './app.component';
 import { UsuarioModule } from './usuario/usuario.module';
 import { PersonaModule } from './persona/persona.module';
 import { EjercicioModule} from './ejercicio/ejercicio.module';
 import { EntrenamientoModule } from './entrenamiento/entrenamiento.module';
+import { RutinaModule } from "./rutina/rutina.module";
+import { EntrenadorModule } from './entrenador/entrenador.module';
 
 @NgModule({
   declarations: [
@@ -22,10 +25,13 @@ import { EntrenamientoModule } from './entrenamiento/entrenamiento.module';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    CustomPipesModule,
     UsuarioModule,
     PersonaModule,
     EjercicioModule,
     EntrenamientoModule,
+    RutinaModule,
+    EntrenadorModule,
     ToastrModule.forRoot({
       timeOut: 7000,
       positionClass: 'toast-bottom-right',

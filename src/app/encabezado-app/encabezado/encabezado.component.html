@@ -4,13 +4,25 @@
   </button>
 
   <!-- enlaces -->
-  <div class="collapse navbar-collapse" id="opciones">
+
+  <!-- barra entrenador -->
+
+  <div class="collapse navbar-collapse" id="opciones" >
     <ul class="navbar-nav">
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="cliente">
+        <a class="nav-link" href="/principal">Principal</a>
+      </li>
+      <li class="nav-item" *ngIf="entrenador">
         <a class="nav-link" href="/persona">Personas</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="entrenador">
         <a class="nav-link" href="/ejercicio">Ejercicios</a>
+      </li>
+      <li class="nav-item" *ngIf="entrenador">
+        <a class="nav-link" href="/rutina">Rutinas</a>
+      </li>
+      <li class="nav-item" *ngIf="admin" >
+        <a class="nav-link" href="/entrenador">Entrenadores</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/">Salir</a>

@@ -9,7 +9,10 @@ import { PersonaDetalleComponent } from './persona-detalle/persona-detalle.compo
 import { PersonaListaComponent } from './persona-lista/persona-lista.component';
 import { PersonaEditarComponent } from './persona-editar/persona-editar.component';
 import { PersonaCrearComponent } from './persona-crear/persona-crear.component';
-import { EntrenamientoPersonaListaComponent } from '../entrenamiento/entrenamiento-persona-lista/entrenamiento-persona-lista.component';
+import { EntrenamientoEjercicioPersonaComponent } from '../entrenamiento/entrenamiento-ejercicio-persona/entrenamiento-ejercicio-persona.component';
+import { EntrenamientoRutinaPersonaComponent } from '../entrenamiento/entrenamiento-rutina-persona/entrenamiento-rutina-persona.component';
+
+import { PersonaPrincipalComponent } from './persona-principal/persona-principal.component';
 
 @NgModule({
   imports: [
@@ -23,8 +26,10 @@ import { EntrenamientoPersonaListaComponent } from '../entrenamiento/entrenamien
     PersonaDetalleComponent,
     PersonaCrearComponent,
     PersonaEditarComponent,
-    EntrenamientoPersonaListaComponent,
-    PersonaTerminarComponent
+    EntrenamientoEjercicioPersonaComponent,
+    EntrenamientoRutinaPersonaComponent,
+    PersonaTerminarComponent,
+    PersonaPrincipalComponent
   ],
   declarations: [
     PersonaListaComponent,
@@ -32,8 +37,10 @@ import { EntrenamientoPersonaListaComponent } from '../entrenamiento/entrenamien
     PersonaCrearComponent,
     PersonaEditarComponent,
     PersonaReporteComponent,
-    EntrenamientoPersonaListaComponent,
-    PersonaTerminarComponent
+    EntrenamientoEjercicioPersonaComponent,
+    EntrenamientoRutinaPersonaComponent,
+    PersonaTerminarComponent,
+    PersonaPrincipalComponent
   ]
 })
 export class PersonaModule { }

@@ -3,6 +3,7 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UsuarioService } from '../usuario.service';
+import { ROLES } from 'src/app/roles';
 
 @Component({
   selector: 'app-usuario-login',
@@ -24,6 +25,7 @@ export class UsuarioLoginComponent implements OnInit {
     sessionStorage.setItem('decodedToken', '');
     sessionStorage.setItem('token', '');
     sessionStorage.setItem('idUsuario', '');
+    sessionStorage.setItem('rol', '');
   }
 
   loginUsuario(usuario: string, contrasena: string) {
@@ -34,11 +36,28 @@ export class UsuarioLoginComponent implements OnInit {
         sessionStorage.setItem('decodedToken', this.helper.decodeToken(res.token));
         sessionStorage.setItem('token', res.token);
         sessionStorage.setItem('idUsuario', res.id);
+        sessionStorage.setItem('rol', res.rol);
+
         this.toastrService.success("Login ok", "Información", {closeButton: true});
-        this.router.navigate([`/persona`])
+        this.redireccionarUsuario(res.rol);
       },
         error => {
           this.error = "Usuario o contraseña incorrectos";
         })
+  }
+
+  redireccionarUsuario(rol: string): void {
+    if(rol === ROLES.persona) {
+      this.router.navigate([`/principal`]);
+    }
+
+    if(rol === ROLES.entrenador) {
+      this.router.navigate([`/persona`]);
+    }
+
+    if(rol === ROLES.admin){
+      this.router.navigate([`/entrenador`]);
+    }
+
   }
 }

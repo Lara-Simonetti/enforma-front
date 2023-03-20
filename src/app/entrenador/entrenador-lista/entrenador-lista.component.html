@@ -1,0 +1,28 @@
+<app-encabezado></app-encabezado>
+<div class="row">
+    <div class="col col-12">
+      <div class="card" style="width: 100%;">
+        <div class="card-header">
+          Entrenador <button type="button" (click)="entrenadorCrear()" class="btn btn-warning"><i class="bi bi-plus-circle"></i></button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Apellido</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr  *ngFor="let entrenador of entrenadores">
+              <td>{{entrenador.nombre}}</td>
+              <td>{{entrenador.apellido}}</td>
+              <td>
+                <button type="button" class="btn btn-primary" (click)="entrenadorEditar(entrenador.id)"><i class="bi bi-pencil"></i></button>
+                <button type="button" class="btn btn-danger" (click)="entrenadorEliminar(entrenador.id)"><i class="bi bi-trash"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

@@ -2,18 +2,20 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Persona } from 'src/app/persona/persona';
-import { Entrenamiento } from '../entrenamiento';
+import { Rutina } from 'src/app/rutina/rutina';
+import { EntrenamientoRutina } from '../entrenamiento';
 import { EntrenamientoService } from '../entrenamiento.service';
 
 @Component({
-  selector: 'app-entrenamiento-persona-lista',
-  templateUrl: './entrenamiento-persona-lista.component.html',
-  styleUrls: ['./entrenamiento-persona-lista.component.css']
+  selector: 'app-entrenamiento-rutina-persona',
+  templateUrl: './entrenamiento-rutina-persona.component.html',
+  styleUrls: ['./entrenamiento-rutina-persona.component.css']
 })
-export class EntrenamientoPersonaListaComponent implements OnInit {
+export class EntrenamientoRutinaPersonaComponent implements OnInit {
 
   @Input() personaDetalle: Persona;
-  @Input() entrenamientos: Array<Entrenamiento>;
+  @Input() entrenamientos: Array<EntrenamientoRutina>;
+  public rutinas: EntrenamientoRutina[] = []
 
   constructor(
     private routerPath: Router,
@@ -23,10 +25,15 @@ export class EntrenamientoPersonaListaComponent implements OnInit {
      { }
 
   ngOnInit() {
+    this.entrenamientoService.darEntrenamientosRutina(this.personaDetalle.id).subscribe(rutinas => {
+      this.rutinas = rutinas;
+    })
   }
 
   entrenamientoCrear() {
-    this.routerPath.navigate(['/entrenamiento/crear/' + this.personaDetalle.id]);
+    this.routerPath.navigate(
+      ['/entrenamiento/crear/' + this.personaDetalle.id],
+      { queryParams: { tipo: 'rutina' } });
   }
 
   entrenamientoEditar(idEntrenamiento: number) {
@@ -34,7 +41,7 @@ export class EntrenamientoPersonaListaComponent implements OnInit {
   }
 
   entrenamientoEliminar(idEntrenamiento: number) {
-    this.entrenamientoService.eliminarEntrenamiento(idEntrenamiento).subscribe((entrenamiento) => {
+    this.entrenamientoService.eliminarEntrenamientoRutina(idEntrenamiento).subscribe((entrenamiento) => {
       this.toastr.success("Confirmation", "Entrenamiento eliminado de la lista")
       window.location.reload();
     },

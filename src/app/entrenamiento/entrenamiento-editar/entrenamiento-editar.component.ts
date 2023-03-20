@@ -6,9 +6,10 @@ import { Persona } from '../../persona/persona';
 import { PersonaService } from 'src/app/persona/persona.service';
 import { Ejercicio } from 'src/app/ejercicio/ejercicio';
 import { EjercicioService } from './../../ejercicio/ejercicio.service';
-import { Entrenamiento } from './../entrenamiento';
+import { EntrenamientoEjercicio } from './../entrenamiento';
 import { EntrenamientoService } from '../entrenamiento.service';
 import { formatDate } from '@angular/common';
+import { ErrorMessageMapperPipe } from 'src/app/custom-pipes/pipes/error-message-mapper.pipe';
 
 @Component({
   selector: 'app-entrenamiento-editar',
@@ -18,7 +19,7 @@ import { formatDate } from '@angular/common';
 export class EntrenamientoEditarComponent implements OnInit {
 
   persona: Persona;
-  entrenamiento: Entrenamiento;
+  entrenamiento: EntrenamientoEjercicio;
   entrenamientoForm: FormGroup;
   ejercicios: Array<Ejercicio>;
   idEjercicio: number;
@@ -30,12 +31,13 @@ export class EntrenamientoEditarComponent implements OnInit {
     private toastr: ToastrService,
     private personaService: PersonaService,
     private ejercicioService: EjercicioService,
-    private entrenamientoService: EntrenamientoService
-) { }
+    private entrenamientoService: EntrenamientoService,
+    private errorMessageMapperPipe: ErrorMessageMapperPipe
+    ) { }
 
   ngOnInit() {
     const entrenamientoId = parseInt(this.router.snapshot.params['id']);
-    this.entrenamientoService.darEntrenamiento(entrenamientoId).subscribe((entrenamiento) => {
+    this.entrenamientoService.darEntrenamientoEjercicio(entrenamientoId).subscribe((entrenamiento) => {
       this.entrenamiento = entrenamiento;
       this.ejercicioService.darEjercicios().subscribe((ejercicios) => {
         this.ejercicios = ejercicios;
@@ -53,23 +55,14 @@ export class EntrenamientoEditarComponent implements OnInit {
   }
 
   editarEntrenamiento(entrenamiento: any): void {
-    this.entrenamientoService.editarEntrenamiento(entrenamiento).subscribe((entrenamiento) => {
+    this.entrenamientoService.editarEntrenamientoEjercicio(entrenamiento).subscribe((entrenamiento) => {
       this.toastr.success("Confirmation", "Entrenamiento editado")
       this.entrenamientoForm.reset();
       this.routerPath.navigate(['/persona/' + this.entrenamiento.persona]);
     },
     error => {
-      if (error.statusText === "UNAUTHORIZED") {
-        this.toastr.error("Error","Su sesión ha caducado, por favor vuelva a iniciar sesión.")
-      }
-      else if (error.statusText === "UNPROCESSABLE ENTITY") {
-        this.toastr.error("Error","No hemos podido identificarlo, por favor vuelva a iniciar sesión.")
-      }
-      else {
-        this.toastr.error("Error","Ha ocurrido un error. " + error.message)
-      }
-    })
-
+      this.toastr.error("Error", this.errorMessageMapperPipe.transform(error));
+    });
   }
 
   cancelarEntrenamiento(): void {
